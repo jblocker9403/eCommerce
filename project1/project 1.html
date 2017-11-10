@@ -19,17 +19,46 @@
                     
          </style>
           <script>
-              function bill(){
-             var subtotal= document.getElementById("subtotal");
-             var price1 = document.getElementById("price1") 
-              var price2 = document.getElementById("price2")
-              var price3 = document.getElementById("price3")                                        
-              var total = document.getElementById("price1 + price2 + price3 =subtotal")
-              build+="subtotal:"+ amount +"in";
-              build+="----------"
-              build="total:"+total"in"
-              return build
-              }
+               function bill() {
+                 var retailprice1 = 999.99
+                 var retailprice2 = 799.99
+                 var retailprice3 = 699.99
+                 var wholesaleprice1 = 749.99
+                 var wholesaleprice2 = 599.99
+                 var wholesaleprice3 = 524.99
+                 var quantity1 = document.getElementById ("Quantity1");
+                 var quantity2 = document.getElementById ("Quantity2");
+                 var quantity3 = document.getElementById ("Quantity3");
+                 var customersubtotal = parseInt(retailprice1 * quantity1.value + retailprice2 * quantity2.value + retailprice3 * quantity3.value);
+                 var companysubtotal = parseInt(wholesaleprice1 * quantity1.value + wholesaleprice2 * quantity2.value + wholesaleprice3 * quantity3.value);
+                 console.log("The Company Subtotal Is $" + companysubtotal);
+                 var totalItems = parseInt (quantity1.value) + parseInt (quantity2.value) + parseInt (quantity3.value);
+                 console.log("The Total Items Sold Is: " + quantity1.value + quantity2.value + quantity3.value) ;
+                 var output = document.getElementById ("output");
+
+                 var shipping = 0;
+                 if(customersubtotal >= 150){
+                }else if(customersubtotal >= 125 && customersubtotal <= 149){
+                    shipping = 15;
+                }else if(customersubtotal >= 100 && customersubtotal <=124){
+                    shipping = 20;
+                }else if(customersubtotal >= 50 && customersubtotal <= 99){
+                    shipping = 25;
+                }
+
+                 var tax = parseFloat(customersubtotal) * 0.0875;
+
+                 var total = parseFloat(customersubtotal) + tax + shipping;
+
+                 var build = "";
+                 build += "Subtotal: $" + customersubtotal + "<br>"
+                 build += "Shipping: $" + shipping + "<br>"
+                 build += "Tax: $" + tax.toFixed(2) + "<br>"
+                 build += "--------------------<br>";
+                 build += "Total: $" + total.toFixed(2);
+
+                 output.innerHTML = build;
+             }
             
     
     </script>
@@ -39,7 +68,7 @@
         <h1>Samgung Galaxy S8</h1>
         <img src ="images.jpg"><br>
         <span>
-            723.98
+            749.99
         </span>
         <p>
         Infinity Display: a bezel-less, full-frontal, edge-to-edge screen. Default resolution is Full HD+ and can be changed to Quad HD+ (WQHD+) in Settings
@@ -59,7 +88,7 @@ Memory: Internal Memory 64 GB, RAM 4GB
         <h2>Goku Wallpaper/skin</h2>
         <img src ="PS4_Skin_Dragon_Ball_Z_Son_Goku_Decal_Stickers_For_Console_2_Controllers_Red_large.jpg"><br>
         <span>
-            20.98
+            599.99
         </span>
         <p>
            
@@ -90,7 +119,7 @@ printing.
         <h3>Batman Statue</h3>
         <img src ="batman_contingency_plan_fourth_scale_statue_salt_and_pepper_statues_1.jpg"><br>
         <span>
-            23.98
+            524.99
         </span>
         <p>
            You can see Batman on a throne with his allies’ accessories around him: Superman’s cape, Aquaman’s trident, a pair of Green Lantern rings, Cyborg’s arm and Flash’s head and it also comes with Wonder Woman’s lasso
@@ -101,6 +130,14 @@ printing.
         <button onclick>
             add to cart
         </button>
+      <br>
+        
+        <button onclick="bill()">
+            Continue To Check Out 
+        </button>
+        <div id="output">
+        </div> 
+
 
     </body> 
 </html>
